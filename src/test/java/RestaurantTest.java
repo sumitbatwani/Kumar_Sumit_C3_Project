@@ -77,5 +77,13 @@ class RestaurantTest {
         assertEquals("Your order will cost: ₹388", totalCost);
     }
 
+    @Test
+    public void select_menu_items_should_throw_item_not_found_exception_when_selection_item_is_unavailable() {
+        ArrayList<String> selectedItems = new ArrayList<String>();
+        selectedItems.add("Bread Slice");
+
+        assertThrows(itemNotFoundException.class, () -> restaurant.selectMenuItems(selectedItems));
+    }
+
     //<<<<<<<<<<<<<<<<<<<<<<<ITEM SELECTION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
