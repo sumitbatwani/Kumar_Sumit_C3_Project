@@ -3,6 +3,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 
 import java.time.LocalTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -56,5 +57,25 @@ class RestaurantTest {
         assertThrows(itemNotFoundException.class,
                 ()->restaurant.removeFromMenu("French fries"));
     }
+
+    @Test
+    public void get_menu_should_display_restaurant_menu() {
+        assertEquals("[Sweet corn soup:119\n" +
+                ", Vegetable lasagne:269\n" +
+                "]", restaurant.getMenu().toString());
+    }
     //<<<<<<<<<<<<<<<<<<<<<<<MENU>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ITEM SELECTION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
+    @Test
+    public void select_menu_items_should_display_total_cost_of_selected_items() throws itemNotFoundException {
+        ArrayList<String> selectedItems = new ArrayList<String>();
+        selectedItems.add("Sweet corn soup");
+        selectedItems.add("Vegetable lasagne");
+
+        String totalCost = restaurant.selectMenuItems(selectedItems);
+        assertEquals("Your order will cost: ₹388", totalCost);
+    }
+
+    //<<<<<<<<<<<<<<<<<<<<<<<ITEM SELECTION>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 }
